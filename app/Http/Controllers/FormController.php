@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllowedDomain;
 use App\Models\Form;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -70,7 +71,17 @@ class FormController extends Controller
             return response()->json(['message' => 'Forbidden access'], 403);
         }
 
-        return response()->json(['message' => 'Get form success', 'form' => $form]);
+        $question = Question::where('form_id', $form->id)->get();
+
+        return response()->json(['message' => 'Get form success', 'form' => [
+            'id' => $form->id,
+            'name' => $form->name,
+            'slug' => $form->slug,
+            'description' => $form->description,
+            'limit_one_response' => $form->limit_one_response,
+            'creator_id' => $form->creator_id,
+            'allowed_domains' => $allowedDomains
+        ], 'questions' => $question ]);
     }
 
     /**
