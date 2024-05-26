@@ -20,6 +20,11 @@ const Responses = () => {
         fetchData();
     }, []);
 
+    const answerKeys =
+        datas.responses?.length > 0
+            ? Object.keys(datas.responses[0].answers)
+            : [];
+
     return (
         <div class="col-lg-10">
             <table class="table mt-3">
@@ -27,11 +32,9 @@ const Responses = () => {
                 <thead>
                     <tr class="text-muted">
                         <th>User</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Sex</th>
-                        <th>Born Date</th>
-                        <th>Hobbies</th>
+                        {answerKeys.map((key) => (
+                          <th key={key}>{key}</th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
@@ -39,11 +42,9 @@ const Responses = () => {
                         datas.responses?.map((data) => (
                             <tr>
                                 <td class="text-primary">{data.user?.email}</td>
-                                <td>Budi Andrianto</td>
-                                <td>Jakarta</td>
-                                <td>Male</td>
-                                <td>2000-09-09</td>
-                                <td>Football, Coding, Guitar.</td>
+                                {answerKeys.map((key) => (
+                                    <td>{data.answers[key]}</td>
+                                ))}
                             </tr>
                         ))}
                 </tbody>

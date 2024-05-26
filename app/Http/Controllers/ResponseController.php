@@ -30,7 +30,7 @@ class ResponseController extends Controller
             return response()->json(['message' => 'Forbidden'], 403);
         }
 
-        $responses = Response::with('answers')->get();
+        $responses = Response::with('answers')->where('form_id', $form->id)->get();
 
         $responseMap = $responses->map(function ($response) use ($form) {
             return [
