@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CreateForm from "./pages/Form/CreateForm";
 import DetailForm from "./pages/Form/DetailForm";
+import SubmitForm from "./pages/Form/SubmitForm";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: "/form/:slug",
                 element: <DetailForm />,
+            },
+            {
+                path: "form/:slug/submit",
+                element: <SubmitForm />,
             },
         ],
     },

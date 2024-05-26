@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AllowedDomain;
 use App\Models\Form;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,7 @@ class FormController extends Controller
         }
 
         $user = Auth::user();
-        $userDomain = explode('@', $user->email)[1];
+        $userDomain = explode('@', $user->email)[1];    
         $allowedDomains = AllowedDomain::where('form_id', $form->id)->pluck('domain')->toArray();
 
         if (!in_array($userDomain, $allowedDomains)) {
@@ -80,6 +81,7 @@ class FormController extends Controller
             'description' => $form->description,
             'limit_one_response' => $form->limit_one_response,
             'creator_id' => $form->creator_id,
+            'creator' => User::find($form->creator_id)->email   ,
             'allowed_domains' => $allowedDomains
         ], 'questions' => $question ]);
     }
