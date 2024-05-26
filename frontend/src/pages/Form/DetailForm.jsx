@@ -55,9 +55,9 @@ const DetailForm = () => {
                                     type="text"
                                     class="form-control form-link"
                                     readonly
-                                    value={`http://localhost:8000/forms/${slug}`}
+                                    value={`http://localhost:5173/form/${slug}/submit`}
                                 />
-                                <Link to={"#"} class="btn btn-primary">
+                                <Link to={`http://localhost:5173/form/${slug}/submit`} class="btn btn-primary">
                                     Copy
                                 </Link>
                             </div>
